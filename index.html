@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="styles/button.css" />
         <link rel="stylesheet" href="styles/icon.css" />
         <link rel="stylesheet" href="styles/input.css" />
+        <link rel="stylesheet" href="styles/scrollbar.css" />
+
         <link rel="stylesheet" href="styles/index.css" />
 
         <script src="scripts/confetti.js"></script>
@@ -21,11 +23,34 @@
         <div class="container-wrapper">
             <div class="raffle-container">
                 <div class="input-container">
-                    <input type="text" value="1" disabled tabindex="0" />
-                    <input type="text" value="100" disabled tabindex="1" />
-                    <i class="far fa-edit" title="Editar" tabindex="2"></i>
+                    <input class="min-value-input" type="text" value="1" tabindex="0" />
+                    <input type="text" value="100" tabindex="1" />
                 </div>
+                <a class="extra-info-link" href="#">Ver relação de NÚMEROS</a>
                 <button tabindex="3">SORTEAR</button>
+            </div>
+        </div>
+
+        <div class="numbers-view-dialog">
+            <div class="numbers-view-dialog-container">
+                <div class="numbers-view-dialog-header">
+                    <h4>Relação de números</h4>
+                    <i class="fas fa-times close-extra-info-btn"></i>
+                </div>
+                <div class="numbers-view-dialog-body">
+                    <div class="numbers-view-legend">
+                        <div class="legend">
+                            <div class="marker selected"></div>
+                            <span class="description">Selecionados</span>
+                        </div>
+                        <div class="legend">
+                            <div class="marker"></div>
+                            <span class="description">Não selecionados</span>
+                        </div>
+                    </div>
+                    <span class="selected-number-count">Todos números selecionados</span>
+                    <div class="numbers-view-container"> </div>
+                </div>
             </div>
         </div>
 

@@ -1,5 +1,9 @@
 function raffle(min, max) {
-    return Math.ceil(Math.random() * (max - min + 1) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function createArrayFromValuesRange(min, max) {
+    return Array.from({ length: max - min + 1 }, (_, i) => i + min);
 }
 
 function initConffeti(element) {
@@ -7,11 +11,11 @@ function initConffeti(element) {
         spread: 150,
         startVelocity: '100',
         elementCount: '250',
-        width: '20px',
-        height: '20px',
+        width: '25px',
+        height: '25px',
         perspective: '500px',
         colors: ['var(--primary)', 'var(--primary-2)', 'var(--secondary)', 'var(--white)'],
-        duration: '7000',
+        duration: '5500',
     };
     confetti(element, config);
 }
