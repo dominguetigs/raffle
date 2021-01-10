@@ -35,7 +35,7 @@ raffleBtn.addEventListener('click', () => {
         }
 
         const timeout = setTimeout(() => {
-            initConffeti(resultConfettiElement);
+            //initConffeti(resultConfettiElement);
             raffleResult.style.color = 'var(--white)';
             resultCloseBtn.style.opacity = 1;
             timeouts.forEach((timer) => clearTimeout(timer));
