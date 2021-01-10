@@ -44,7 +44,7 @@ raffleBtn.addEventListener('click', () => {
         }, 25 * maxLoop);
 
         clearTimeout(principalTimeout);
-    }, 400);
+    }, 500);
 });
 
 resultCloseBtn.addEventListener('click', () => {
