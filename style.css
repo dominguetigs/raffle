@@ -127,8 +127,8 @@ body.image-background {
 .container-wrapper {
     position: relative;
 
-    height: 60vh;
-    width: 60vw;
+    height: 60%;
+    width: 60%;
 
     padding: 50px;
     background-color: rgba(255, 255, 255, 0.3);
@@ -196,8 +196,8 @@ body.image-background {
     }
 
     .container-wrapper {
-        height: 50vh;
-        width: 90vw;
+        height: 50%;
+        width: 90%;
         padding: 10px;
     }
 
