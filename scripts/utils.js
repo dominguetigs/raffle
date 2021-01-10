@@ -1,8 +1,18 @@
+function swap(a, b) {
+    return [b, a];
+}
+
 function raffle(min, max) {
+    if (min > max) {
+        [min, max] = swap(min, max);
+    }
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function createArrayFromValuesRange(min, max) {
+    if (min > max) {
+        [min, max] = swap(min, max);
+    }
     return Array.from({ length: max - min + 1 }, (_, i) => i + min);
 }
 
