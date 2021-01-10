@@ -12,7 +12,7 @@ function initConffeti(element) {
         perspective: '500px',
         colors: ['var(--primary)', 'var(--primary-2)', 'var(--secondary)', 'var(--white)'],
         duration: '7000',
-        stagger: 2,
+        stagger: 1,
     };
     confetti(element, config);
 }
