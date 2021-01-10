@@ -1,9 +1,0 @@
-i {
-    cursor: pointer;
-    font-size: 30px;
-    color: var(--primary-2);
-}
-
-i:hover {
-    color: var(--primary);
-}
