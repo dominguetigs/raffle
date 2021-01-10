@@ -21,6 +21,7 @@ raffleBtn.addEventListener('click', () => {
     raffleAudio.play();
 
     const principalTimeout = setTimeout(() => {
+        raffleBtn.disabled = true;
         raffleResultContainer.style.visibility = 'visible';
         raffleResultContainer.style.opacity = 1;
 
@@ -43,7 +44,7 @@ raffleBtn.addEventListener('click', () => {
         }, 25 * maxLoop);
 
         clearTimeout(principalTimeout);
-    }, 500);
+    }, 400);
 });
 
 resultCloseBtn.addEventListener('click', () => {
@@ -51,6 +52,7 @@ resultCloseBtn.addEventListener('click', () => {
     raffleResultContainer.style.opacity = 0;
 
     const timeout = setTimeout(() => {
+        raffleBtn.disabled = false;
         raffleResultContainer.style.visibility = 'hidden';
         clearTimeout(timeout);
     }, 1000);
