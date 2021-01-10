@@ -38,6 +38,7 @@ raffleBtn.addEventListener('click', () => {
         const timeout = setTimeout(() => {
             initConffeti(resultConfettiElement);
             raffleResult.style.color = 'var(--white)';
+            resultCloseBtn.style.visibility = 'visible';
             resultCloseBtn.style.opacity = 1;
             timeouts.forEach((timer) => clearTimeout(timer));
             clearTimeout(timeout);
@@ -53,6 +54,7 @@ resultCloseBtn.addEventListener('click', () => {
 
     const timeout = setTimeout(() => {
         raffleBtn.disabled = false;
+        resultCloseBtn.style.visibility = 'hidden';
         raffleResultContainer.style.visibility = 'hidden';
         clearTimeout(timeout);
     }, 1000);
