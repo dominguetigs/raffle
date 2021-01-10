@@ -6,7 +6,7 @@ function initConffeti(element) {
     const config = {
         spread: 150,
         startVelocity: '100',
-        elementCount: '500',
+        elementCount: '300',
         width: '20px',
         height: '20px',
         perspective: '500px',
