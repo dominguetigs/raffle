@@ -45,6 +45,11 @@ function resetSelectedNumbersToRaffle() {
 }
 
 function createNumbersViewBoxes() {
+    if (!inputElements[0].value || !inputElements[1].value) {
+        alert('Sem intervalo de números suficientes para Sorteio.');
+        return;
+    }
+
     if (inputValuesChanged()) {
         const viewBoxesRange = selectedNumbersToRaffle;
 
@@ -110,6 +115,11 @@ extraInfoLink.addEventListener('click', () => {
 });
 
 raffleBtn.addEventListener('click', () => {
+    if (!inputElements[0].value || !inputElements[1].value) {
+        alert('Sem intervalo de números suficientes para Sorteio.');
+        return;
+    }
+
     raffleAudio.currentTime = 0;
     raffleAudio.play();
 
