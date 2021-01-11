@@ -79,6 +79,7 @@ inputElements.forEach((input) =>
             selectedNumbersRange.max.previousValue = selectedNumbersRange.max.currentValue;
             selectedNumbersRange.max.currentValue = +e.target.value;
         }
+        selectedNumberCount.innerHTML = 'Todos números selecionados';
         resetSelectedNumbersToRaffle();
         createNumbersViewBoxes();
     })
