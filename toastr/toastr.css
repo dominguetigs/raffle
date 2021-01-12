@@ -1,0 +1,41 @@
+:root {
+    --toastr-success: #51a351;
+    --toastr-info: #2f96b4;
+    --toastr-warning: #f89406;
+    --toastr-error: #bd362f;
+}
+
+.toastr {
+    position: absolute;
+    width: 300px;
+    height: 80px;
+    padding: 15px;
+    border-radius: 5px;
+    top: 20px;
+    right: 20px;
+    box-shadow: 0 0 12px var(--gray);
+    color: var(--white);
+    opacity: 0;
+    transition: opacity ease-in 0.5s;
+}
+
+.toastr:hover {
+    box-shadow: 0 0 12px var(--black);
+    cursor: pointer;
+}
+
+.toastr.success {
+    background-color: var(--toastr-success);
+}
+
+.toastr.info {
+    background-color: var(--toastr-info);
+}
+
+.toastr.warning {
+    background-color: var(--toastr-warning);
+}
+
+.toastr.error {
+    background-color: var(--toastr-error);
+}

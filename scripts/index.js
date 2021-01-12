@@ -27,6 +27,35 @@ const selectedNumbersRange = {
 
 let selectedNumbersToRaffle = [];
 
+function inputValuesIsEmpty() {
+    return !inputElements[0].value || !inputElements[1].value;
+}
+
+function inputValuesIsReversed() {
+    return selectedNumbersRange.min.currentValue > selectedNumbersRange.max.currentValue;
+}
+
+function inputValuesIsEqual() {
+    return selectedNumbersRange.min.currentValue === selectedNumbersRange.max.currentValue;
+}
+
+function hasWarningMessage() {
+    let hasWarning = false;
+
+    if (inputValuesIsEmpty()) {
+        toastr.warning('Sem número suficiente para criar sorteio.');
+        hasWarning = true;
+    } else if (inputValuesIsEqual()) {
+        toastr.warning('Números não podem ser iguais.');
+        hasWarning = true;
+    } else if (inputValuesIsReversed()) {
+        toastr.warning('Primeiro número não pode ser maior que o segundo.');
+        hasWarning = true;
+    }
+
+    return hasWarning;
+}
+
 function inputValuesChanged() {
     return (
         selectedNumbersRange.min.currentValue !== selectedNumbersRange.min.previousValue ||
@@ -105,43 +134,47 @@ numbersViewContainer.addEventListener('click', (e) => {
 });
 
 extraInfoLink.addEventListener('click', () => {
-    numbersViewDialog.style.visibility = 'visible';
-    numbersViewDialog.style.opacity = 1;
+    if (!hasWarningMessage()) {
+        numbersViewDialog.style.visibility = 'visible';
+        numbersViewDialog.style.opacity = 1;
+    }
 });
 
 raffleBtn.addEventListener('click', () => {
-    raffleAudio.currentTime = 0;
-    raffleAudio.play();
+    if (!hasWarningMessage()) {
+        raffleAudio.currentTime = 0;
+        raffleAudio.play();
 
-    const principalTimeout = setTimeout(() => {
-        raffleBtn.disabled = true;
-        raffleResultContainer.style.visibility = 'visible';
-        raffleResultContainer.style.opacity = 1;
+        const principalTimeout = setTimeout(() => {
+            raffleBtn.disabled = true;
+            raffleResultContainer.style.visibility = 'visible';
+            raffleResultContainer.style.opacity = 1;
 
-        const maxLoop = 215;
-        const timeouts = [];
+            const maxLoop = 215;
+            const timeouts = [];
 
-        const minValue = 0;
-        const maxValue = selectedNumbersToRaffle.length - 1;
+            const minValue = 0;
+            const maxValue = selectedNumbersToRaffle.length - 1;
 
-        for (let i = 1; i <= maxLoop; i++) {
+            for (let i = 1; i <= maxLoop; i++) {
+                const timeout = setTimeout(() => {
+                    raffleResult.innerHTML = selectedNumbersToRaffle[raffle(minValue, maxValue)];
+                }, 25 * i);
+                timeouts.push(timeout);
+            }
+
             const timeout = setTimeout(() => {
-                raffleResult.innerHTML = selectedNumbersToRaffle[raffle(minValue, maxValue)];
-            }, 25 * i);
-            timeouts.push(timeout);
-        }
+                initConffeti(resultConfettiElement);
+                raffleResult.style.color = 'var(--white)';
+                resultCloseBtn.style.visibility = 'visible';
+                resultCloseBtn.style.opacity = 1;
+                timeouts.forEach((timer) => clearTimeout(timer));
+                clearTimeout(timeout);
+            }, 25 * maxLoop);
 
-        const timeout = setTimeout(() => {
-            initConffeti(resultConfettiElement);
-            raffleResult.style.color = 'var(--white)';
-            resultCloseBtn.style.visibility = 'visible';
-            resultCloseBtn.style.opacity = 1;
-            timeouts.forEach((timer) => clearTimeout(timer));
-            clearTimeout(timeout);
-        }, 25 * maxLoop);
-
-        clearTimeout(principalTimeout);
-    }, 500);
+            clearTimeout(principalTimeout);
+        }, 500);
+    }
 });
 
 closeExtraInfoBtn.addEventListener('click', () => {
