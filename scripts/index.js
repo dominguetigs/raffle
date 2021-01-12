@@ -25,7 +25,16 @@ const selectedNumbersRange = {
     },
 };
 
-let selectedNumbersToRaffle = [];
+// ?n=2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,19,20,21,22,24,25,26,27,28,29,30,31,35,36,37,40,42,44,45,46,48,52,53,54,61,63,66,69,70,72,75,77,80,89,95,100
+let selectedNumbersToRaffle =
+    new URLSearchParams(window.location.search)
+        .get('n')
+        ?.split(',')
+        .map((n) => +n) || createValuesRangeFromInputValues();
+
+function updateUrlParams() {
+    history.replaceState(null, null, `?n=${selectedNumbersToRaffle.join(',')}`);
+}
 
 function inputValuesIsEmpty() {
     return !inputElements[0].value || !inputElements[1].value;
@@ -69,20 +78,19 @@ function createValuesRangeFromInputValues() {
     return createArrayFromValuesRange(minValue, maxValue);
 }
 
-function resetSelectedNumbersToRaffle() {
-    selectedNumbersToRaffle = createValuesRangeFromInputValues();
-}
-
 function createNumbersViewBoxes() {
     if (inputValuesChanged()) {
-        const viewBoxesRange = selectedNumbersToRaffle;
+        const viewBoxesRange = createValuesRangeFromInputValues();
 
         numbersViewContainer.innerHTML = '';
 
         for (const n of viewBoxesRange) {
             const numberViewBoxElement = document.createElement('div');
             numberViewBoxElement.classList.add('number-view-box');
-            numberViewBoxElement.classList.add('selected');
+
+            if (selectedNumbersToRaffle.indexOf(n) !== -1) {
+                numberViewBoxElement.classList.add('selected');
+            }
 
             const viewBoxNumberElement = document.createElement('span');
             viewBoxNumberElement.classList.add('number');
@@ -109,7 +117,8 @@ inputElements.forEach((input) =>
             selectedNumbersRange.max.currentValue = +e.target.value;
         }
         selectedNumberCount.innerHTML = 'Todos números selecionados';
-        resetSelectedNumbersToRaffle();
+        selectedNumbersToRaffle = createValuesRangeFromInputValues();
+        updateUrlParams();
         createNumbersViewBoxes();
     })
 );
@@ -122,9 +131,11 @@ numbersViewContainer.addEventListener('click', (e) => {
     if ([...parentElement.classList].indexOf('selected') !== -1) {
         parentElement.classList.remove('selected');
         selectedNumbersToRaffle.splice(selectedNumbersToRaffle.indexOf(selectedNumber), 1);
+        updateUrlParams();
     } else {
         parentElement.classList.add('selected');
         selectedNumbersToRaffle.push(selectedNumber);
+        updateUrlParams();
     }
 
     selectedNumberCount.innerHTML =
@@ -197,5 +208,4 @@ resultCloseBtn.addEventListener('click', () => {
     }, 1000);
 });
 
-resetSelectedNumbersToRaffle();
 createNumbersViewBoxes();
