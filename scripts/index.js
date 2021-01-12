@@ -80,6 +80,7 @@ function createValuesRangeFromInputValues() {
 
 function createNumbersViewBoxes() {
     if (inputValuesChanged()) {
+        updateUrlParams();
         const viewBoxesRange = createValuesRangeFromInputValues();
 
         numbersViewContainer.innerHTML = '';
