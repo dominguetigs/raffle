@@ -11,7 +11,7 @@ toastrElement.addEventListener('click', () => {
 });
 
 function openToastr(action, message) {
-    toastrElement.classList.remove(['success', 'info', 'warning', 'error']);
+    toastrElement.classList.remove('success', 'info', 'warning', 'error');
     toastrElement.classList.add(action);
     toastrElement.innerHTML = message;
     toastrElement.style.opacity = 1;
