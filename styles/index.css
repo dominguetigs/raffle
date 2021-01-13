@@ -41,7 +41,7 @@ body.image-background {
 }
 
 .container-wrapper {
-    position: fixed;
+    position: absolute;
     bottom: 0;
 
     height: 30vh;
