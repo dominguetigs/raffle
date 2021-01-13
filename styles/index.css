@@ -314,15 +314,3 @@ body.image-background {
         font-size: 15vw;
     }
 }
-
-@media (orientation: landscape) {
-    .header {
-        font-size: 30px;
-    }
-
-    .container-wrapper {
-        height: 50vh;
-        width: 100vw;
-        padding: 15px;
-    }
-}
