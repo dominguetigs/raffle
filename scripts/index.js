@@ -154,19 +154,18 @@ extraInfoLink.addEventListener('click', () => {
 
 raffleBtn.addEventListener('click', () => {
     if (!hasWarningMessage()) {
-        raffleAudio.currentTime = 0;
+        raffleAudio.currentTime = 1;
         raffleAudio.play();
 
-        const principalTimeout = setTimeout(() => {
+        if (!raffleAudio.paused) {
             raffleBtn.disabled = true;
             raffleResultContainer.style.visibility = 'visible';
             raffleResultContainer.style.opacity = 1;
 
-            const maxLoop = 215;
-            const timeouts = [];
-
+            const maxLoop = 200;
             const minValue = 0;
             const maxValue = selectedNumbersToRaffle.length - 1;
+            const timeouts = [];
 
             for (let i = 1; i <= maxLoop; i++) {
                 const timeout = setTimeout(() => {
@@ -183,9 +182,7 @@ raffleBtn.addEventListener('click', () => {
                 timeouts.forEach((timer) => clearTimeout(timer));
                 clearTimeout(timeout);
             }, 25 * maxLoop);
-
-            clearTimeout(principalTimeout);
-        }, 500);
+        }
     }
 });
 
@@ -200,13 +197,13 @@ closeExtraInfoBtn.addEventListener('click', () => {
 resultCloseBtn.addEventListener('click', () => {
     resultCloseBtn.style.opacity = 0;
     raffleResultContainer.style.opacity = 0;
+    raffleBtn.disabled = false;
 
     const timeout = setTimeout(() => {
-        raffleBtn.disabled = false;
         resultCloseBtn.style.visibility = 'hidden';
         raffleResultContainer.style.visibility = 'hidden';
         clearTimeout(timeout);
-    }, 1000);
+    }, 400);
 });
 
 createNumbersViewBoxes();
