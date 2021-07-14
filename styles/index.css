@@ -19,11 +19,15 @@ body {
 }
 
 body.image-background {
+    background: var(--gray-light);
+}
+
+/* body.image-background {
     background-image: url('../assets/img/zuza.png');
     background-repeat: no-repeat;
     background-position: center 20%;
     background-size: cover;
-}
+} */
 
 .header {
     position: absolute;
@@ -268,9 +272,9 @@ body.image-background {
 }
 
 @media only screen and (max-width: 800px) {
-    body.image-background {
+    /* body.image-background {
         background-position: center 25%;
-    }
+    } */
 
     .header {
         font-size: 30px;
